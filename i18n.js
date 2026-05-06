@@ -1,0 +1,221 @@
+/* Lightweight i18n for ARC site
+   - Auto-detects from browser/system on first visit
+   - Manual toggle persists in localStorage under 'arc-lang'
+   - Translations applied via [data-i18n="key"] */
+
+(function () {
+    const STORAGE_KEY = 'arc-lang';
+
+    const dict = {
+        en: {
+            'meta.title':         "Ankit Road Carriers, Freight from the Port to Every Pin Code.",
+            'brand.name':         "Ankit Road Carriers",
+            'brand.tagline':      "Transport Operator · Commission Agent",
+            'nav.home':           "Home",
+            'nav.services':       "Operations",
+            'nav.gallery':        "On the Ground",
+            'nav.clients':        "Clients",
+            'nav.contact':        "Contact",
+            'banner.est':         "Est. 2017, 8 years on the road",
+            'hero.eyebrow':       "Mangalore · Sonipat · Pan-India",
+            'hero.title1':        "Eight years",
+            'hero.title2':        "moving India's freight.",
+            'hero.subtitle':      "A transport operator and commission agent moving full truck loads for manufacturers who need their goods picked up on time, every time, and tracked by a human who answers the phone.",
+            'hero.cta1':          "What We Operate →",
+            'hero.cta2':          "Book a Load",
+            'stat.years':         "Years on the road",
+            'stat.branches':      "Branches · MNG / SNP",
+            'stat.rating':        "Google rating",
+            'stat.coverageVal':   "All India",
+            'stat.coverage':      "Coverage on demand",
+            'services.eyebrow':   "What we operate",
+            'services.heading':   "Built for industrial freight.",
+            'services.intro':     "Three things, done seriously. Coordination, capacity, and a yard that keeps trucks ready when the dispatch call comes in.",
+            'service1.tag':       "Service 01 · Coordination",
+            'service1.title':     "Commission Agent",
+            'service1.body':      "We act as your booking desk on the ground in Mangalore, matching your consignment with the right operator, the right truck, and the right rate. Your goods don't wait in line.",
+            'service2.tag':       "Service 02 · Capacity",
+            'service2.title':     "Full Truck Loads",
+            'service2.body':      "FTL movement out of Mangalore to every major industrial corridor in India, with deep lane experience on Kanpur, Lucknow, and Barabanki routes built up over 8 years.",
+            'service3.tag':       "Service 03 · Yard",
+            'service3.title':     "Lorry Parking",
+            'service3.body':      "A secured parking facility near the port for drivers and operators between hauls. Rest, repair, and ready to roll when the next load is called.",
+
+            'fleet.eyebrow':      "On the ground",
+            'fleet.heading':      "Trucks. Yard. Team.",
+            'fleet.intro':        "Straight from our yard, our trucks, and our daily runs across the country.",
+            'fleet.caption':      "NMPT Yard · Panambur, Mangalore",
+            'founder.eyebrow':    "At the helm",
+            'founder.name':       "Mangat Ram Sharma",
+            'founder.role':       "Proprietor, since 2017",
+            'clients.eyebrow':    "Trusted by manufacturers",
+            'clients.heading':    "We move freight for India's industrial floor.",
+            'clients.intro':      "Long-standing relationships with manufacturers and exporters who can't afford a missed dispatch.",
+            'contact.eyebrow':    "Get in touch",
+            'contact.heading':    "One call is all it takes to get your freight moving.",
+            'contact.officesHeading': "Our Offices",
+            'office.main':        "Main Office",
+            'office.sub':         "Sub Branch",
+            'office.new':         "NEW",
+            'office.dispatch':    "Dispatch Lines",
+            'office.email':       "Email",
+            'office.mainAddr':    "Beach Road, NMPT Timber Yard, Panambur, Mangalore 575 010",
+            'office.subAddr':     "Sonipat, Haryana",
+            'social.email':       "Email Us",
+            'footer.mark':        "ARC · Est. 2017 · Mangalore",
+            'footer.rights':      "© 2026 Ankit Road Carriers. All rights reserved.",
+        },
+        hi: {
+            'meta.title':         "अंकित रोड कैरियर्स, बंदरगाह से हर पिन कोड तक माल पहुँचाते हैं।",
+            'brand.name':         "अंकित रोड कैरियर्स",
+            'brand.tagline':      "ट्रांसपोर्ट ऑपरेटर · कमीशन एजेंट",
+            'nav.home':           "होम",
+            'nav.services':       "सेवाएँ",
+            'nav.gallery':        "हमारी गतिविधियाँ",
+            'nav.clients':        "ग्राहक",
+            'nav.contact':        "संपर्क",
+            'banner.est':         "स्थापना 2017, 8 साल से सड़क पर",
+            'hero.eyebrow':       "मंगलौर · सोनीपत · पूरे भारत में",
+            'hero.title1':        "आठ साल से",
+            'hero.title2':        "भारत का माल ढो रहे हैं।",
+            'hero.subtitle':      "फुल ट्रक लोड भेजने वाला ट्रांसपोर्ट ऑपरेटर और कमीशन एजेंट। उन निर्माताओं के लिए जिन्हें अपना माल समय पर उठवाना है और एक ऐसे इंसान से बात करनी है जो फ़ोन उठाता है।",
+            'hero.cta1':          "हमारी सेवाएँ →",
+            'hero.cta2':          "लोड बुक करें",
+            'stat.years':         "साल सड़क पर",
+            'stat.branches':      "शाखाएँ · मंगलौर / सोनीपत",
+            'stat.rating':        "गूगल रेटिंग",
+            'stat.coverageVal':   "पूरा भारत",
+            'stat.coverage':      "ज़रूरत के अनुसार सेवा",
+            'services.eyebrow':   "हम क्या करते हैं",
+            'services.heading':   "औद्योगिक माल ढुलाई के लिए बना।",
+            'services.intro':     "तीन काम, पूरी ज़िम्मेदारी से। कोऑर्डिनेशन, क्षमता, और एक यार्ड जो हर डिस्पैच कॉल पर ट्रक तैयार रखता है।",
+            'service1.tag':       "सेवा 01 · कोऑर्डिनेशन",
+            'service1.title':     "कमीशन एजेंट",
+            'service1.body':      "हम मंगलौर में आपकी बुकिंग डेस्क हैं। आपके माल को सही ऑपरेटर, सही ट्रक और सही रेट से जोड़ते हैं। आपका माल लाइन में नहीं रुकता।",
+            'service2.tag':       "सेवा 02 · क्षमता",
+            'service2.title':     "फुल ट्रक लोड",
+            'service2.body':      "मंगलौर से भारत के हर बड़े औद्योगिक क्षेत्र तक एफटीएल मूवमेंट। कानपुर, लखनऊ और बाराबंकी रूट पर 8 साल का गहरा अनुभव।",
+            'service3.tag':       "सेवा 03 · यार्ड",
+            'service3.title':     "लॉरी पार्किंग",
+            'service3.body':      "बंदरगाह के पास ड्राइवरों और ऑपरेटरों के लिए सुरक्षित पार्किंग सुविधा। आराम, मरम्मत, और अगले लोड के लिए तैयार।",
+
+            'fleet.eyebrow':      "ज़मीन पर",
+            'fleet.heading':      "ट्रक। यार्ड। टीम।",
+            'fleet.intro':        "हमारे यार्ड, हमारे ट्रक, और देशभर में हमारी रोज़मर्रा की ढुलाई की असली झलक।",
+            'fleet.caption':      "एनएमपीटी यार्ड · पनम्बूर, मंगलौर",
+            'founder.eyebrow':    "कमान में",
+            'founder.name':       "मंगत राम शर्मा",
+            'founder.role':       "प्रोपराइटर, 2017 से",
+            'clients.eyebrow':    "निर्माताओं का भरोसा",
+            'clients.heading':    "हम भारत के औद्योगिक कारख़ानों के लिए माल ढोते हैं।",
+            'clients.intro':      "उन निर्माताओं और निर्यातकों के साथ लंबा रिश्ता, जो एक भी डिस्पैच मिस नहीं कर सकते।",
+            'contact.eyebrow':    "हमसे संपर्क करें",
+            'contact.heading':    "एक कॉल करें, बाकी हम सँभाल लेंगे।",
+            'contact.officesHeading': "हमारे कार्यालय",
+            'office.main':        "मुख्य कार्यालय",
+            'office.sub':         "उप शाखा",
+            'office.new':         "नया",
+            'office.dispatch':    "डिस्पैच लाइन्स",
+            'office.email':       "ईमेल",
+            'office.mainAddr':    "बीच रोड, एनएमपीटी टिम्बर यार्ड, पनम्बूर, मंगलौर 575 010",
+            'office.subAddr':     "सोनीपत, हरियाणा",
+            'social.email':       "ईमेल भेजें",
+            'footer.mark':        "एआरसी · स्थापना 2017 · मंगलौर",
+            'footer.rights':      "© 2026 अंकित रोड कैरियर्स. सर्वाधिकार सुरक्षित।",
+        }
+    };
+
+    function detectInitialLang() {
+        const stored = localStorage.getItem(STORAGE_KEY);
+        if (stored === 'en' || stored === 'hi') return stored;
+        const sysLangs = (navigator.languages && navigator.languages.length)
+            ? navigator.languages
+            : [navigator.language || 'en'];
+        for (const l of sysLangs) {
+            if (l && l.toLowerCase().startsWith('hi')) return 'hi';
+        }
+        return 'en';
+    }
+
+    function applyLang(lang, animate) {
+        const table = dict[lang] || dict.en;
+        const root  = document.documentElement;
+        const isInitial = !root.hasAttribute('data-lang');
+
+        const swap = () => {
+            root.lang = lang;
+            root.setAttribute('data-lang', lang);
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (table[key] != null) {
+                    if (el.tagName === 'TITLE') {
+                        document.title = table[key];
+                    } else {
+                        el.textContent = table[key];
+                    }
+                }
+            });
+
+            document.querySelectorAll('.lang-toggle .lang-opt').forEach(opt => {
+                opt.classList.toggle('is-active', opt.dataset.lang === lang);
+            });
+        };
+
+        if (!animate || isInitial) {
+            swap();
+            return;
+        }
+
+        // Full-page wipe: sweep in → swap text behind curtain → sweep out
+        const wipe = document.getElementById('langWipe');
+        if (!wipe) { swap(); return; }
+
+        root.classList.add('lang-switching');
+
+        // Phase 1: wipe sweeps in from left
+        wipe.classList.remove('wipe-out');
+        wipe.classList.add('wipe-in');
+
+        window.setTimeout(() => {
+            // Text swaps while fully covered
+            swap();
+
+            // Phase 2: wipe sweeps out to right
+            wipe.classList.remove('wipe-in');
+            wipe.classList.add('wipe-out');
+
+            window.setTimeout(() => {
+                wipe.classList.remove('wipe-out');
+                root.classList.remove('lang-switching');
+            }, 400);
+        }, 400);
+    }
+
+    function init() {
+        const lang = detectInitialLang();
+        applyLang(lang);
+
+        const toggle = document.getElementById('langToggle');
+        if (toggle) {
+            toggle.addEventListener('click', (e) => {
+                const clickedOpt = e.target.closest('.lang-opt');
+                let next;
+                if (clickedOpt) {
+                    next = clickedOpt.dataset.lang;
+                } else {
+                    next = (document.documentElement.getAttribute('data-lang') === 'hi') ? 'en' : 'hi';
+                }
+                if (next === document.documentElement.getAttribute('data-lang')) return;
+                localStorage.setItem(STORAGE_KEY, next);
+                applyLang(next, true);
+            });
+        }
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
