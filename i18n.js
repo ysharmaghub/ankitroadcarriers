@@ -204,14 +204,8 @@
         const toggle = document.getElementById('langToggle');
         if (toggle) {
             toggle.addEventListener('click', (e) => {
-                const clickedOpt = e.target.closest('.lang-opt');
-                let next;
-                if (clickedOpt) {
-                    next = clickedOpt.dataset.lang;
-                } else {
-                    next = (document.documentElement.getAttribute('data-lang') === 'hi') ? 'en' : 'hi';
-                }
-                if (next === document.documentElement.getAttribute('data-lang')) return;
+                const current = document.documentElement.getAttribute('data-lang') || 'en';
+                const next = current === 'hi' ? 'en' : 'hi';
                 localStorage.setItem(STORAGE_KEY, next);
                 applyLang(next, true);
             });

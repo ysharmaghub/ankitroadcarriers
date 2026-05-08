@@ -20,7 +20,7 @@
     <!-- Navbar -->
     <header class="navbar">
         <div class="logo-container">
-            <img src="logonobg.png" alt="Ankit Road Carriers Logo" class="company-logo">
+            <img src="logofavicon.png" alt="Ankit Road Carriers Logo" class="company-logo">
             <div class="company-brand">
                 <span class="company-name" data-i18n="brand.name">Ankit Road Carriers</span>
                 <span class="company-tagline" data-i18n="brand.tagline">Transport Operator · Commission Agent</span>
@@ -40,8 +40,8 @@
                 <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
             </ul>
             <button class="lang-toggle" id="langToggle" aria-label="Toggle language">
+                <div class="lang-toggle-thumb"></div>
                 <span class="lang-opt" data-lang="en">EN</span>
-                <span class="lang-sep">/</span>
                 <span class="lang-opt" data-lang="hi">हि</span>
             </button>
         </nav>
@@ -170,7 +170,9 @@
                     <span class="eyebrow eyebrow-center" data-i18n="fleet.eyebrow">On the ground</span>
                     <h2 class="section-heading reveal-on-scroll" data-i18n="fleet.heading">Trucks. Yard. Team.</h2>
                 </div>
+            </div>
 
+            <div class="slideshow-wrapper" style="padding: 0 1.75rem;">
                 <div class="slideshow-container reveal-on-scroll" style="transition-delay: 0.1s;">
                     <img src="truck/2.jpg" alt="Lorry" class="slide">
                     <img src="truck/20180928_161541.jpg" alt="Lorry" class="slide">
@@ -180,7 +182,9 @@
                     <img src="truck/parking.jpg" alt="Lorry" class="slide">
                     <div class="slide-caption" data-i18n="fleet.caption">NMPT Yard · Panambur, Mangalore</div>
                 </div>
+            </div>
 
+            <div class="container">
                 <div class="founder-block reveal-on-scroll" style="transition-delay: 0.2s;">
                     <div class="founder-photo">
                         <img src="user.jpg" alt="Mangat Ram Sharma">
@@ -365,7 +369,8 @@
     <button id="backToTopBtn" aria-label="Back to Top">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
             stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 15l-6-6-6 6" />
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
         </svg>
     </button>
 

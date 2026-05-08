@@ -3,7 +3,7 @@
    ========================================================= */
 
 :root {
-    --ink-900:        #0a1628;
+    --ink-900:        #000000;
     --ink-800:        #11203a;
     --ink-700:        #1f2937;
     --ink-500:        #4b5563;
@@ -29,7 +29,7 @@
     --surface:        var(--paper);
     --text:           var(--ink-900);
     --text-muted:     var(--ink-500);
-    --rule:           rgba(10, 22, 40, 0.12);
+    --rule:           rgba(0, 0, 0, 0.12);
 
     --font-display:   'Archivo Narrow', 'Archivo', 'Inter', sans-serif;
     --font-body:      'Inter', system-ui, sans-serif;
@@ -39,9 +39,9 @@
     --radius-md:      6px;
     --radius-lg:      10px;
 
-    --shadow-sm:      0 1px 0 rgba(10, 22, 40, 0.06), 0 1px 2px rgba(10, 22, 40, 0.04);
-    --shadow-md:      0 2px 0 rgba(10, 22, 40, 0.05), 0 8px 24px -8px rgba(10, 22, 40, 0.18);
-    --shadow-lg:      0 30px 60px -20px rgba(10, 22, 40, 0.35);
+    --shadow-sm:      0 1px 0 rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+    --shadow-md:      0 2px 0 rgba(0, 0, 0, 0.05), 0 8px 24px -8px rgba(0, 0, 0, 0.18);
+    --shadow-lg:      0 30px 60px -20px rgba(0, 0, 0, 0.35);
 
     --transition:     200ms cubic-bezier(0.2, 0.8, 0.2, 1);
 
@@ -105,7 +105,7 @@ html[lang="hi"] .company-tagline  { white-space: normal; overflow: visible; text
     background: linear-gradient(
         135deg,
         var(--ink-900) 0%,
-        rgba(10, 22, 40, 0.97) 60%,
+        rgba(0, 0, 0, 0.97) 60%,
         var(--ink-900) 100%
     );
     transform: scaleX(0);
@@ -258,10 +258,10 @@ h1, h2, h3, h4 {
 .navbar {
     position: sticky;
     top: 0;
-    background: rgba(250, 247, 242, 0.92);
+    background: rgba(0, 0, 0, 0.95);
     backdrop-filter: saturate(140%) blur(10px);
     -webkit-backdrop-filter: saturate(140%) blur(10px);
-    border-bottom: 1px solid var(--rule);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding: 0.85rem 1.5rem;
     display: flex;
     justify-content: space-between;
@@ -272,7 +272,7 @@ h1, h2, h3, h4 {
 }
 .navbar.scrolled {
     padding: 0.55rem 1.5rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
 }
 
 .logo-container { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
@@ -282,7 +282,7 @@ h1, h2, h3, h4 {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: 1.1rem;
-    color: var(--text);
+    color: #ffffff;
     letter-spacing: -0.01em;
     text-transform: uppercase;
     white-space: nowrap;
@@ -316,7 +316,7 @@ h1, h2, h3, h4 {
 }
 .nav-links a {
     text-decoration: none;
-    color: var(--ink-700);
+    color: rgba(255, 255, 255, 0.8);
     font-weight: 600;
     font-size: 0.82rem;
     text-transform: uppercase;
@@ -336,46 +336,64 @@ h1, h2, h3, h4 {
     transform-origin: left;
     transition: transform var(--transition);
 }
-.nav-links a:hover { color: var(--text); }
+.nav-links a:hover { color: #ffffff; }
 .nav-links a:hover::after,
 .nav-links a.active::after { transform: scaleX(1); }
 
 /* Language toggle */
 .lang-toggle {
-    background: transparent;
-    border: 1px solid var(--rule);
-    border-radius: var(--radius-sm);
-    padding: 0.35rem 0.55rem;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    padding: 2px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    outline: none;
+    transition: border-color var(--transition);
+}
+.lang-toggle:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+}
+.lang-toggle .lang-toggle-thumb {
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    width: calc(50% - 2px);
+    background: var(--amber-600);
+    border-radius: 16px;
+    transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+    z-index: 0;
+}
+.lang-toggle .lang-opt {
+    position: relative;
+    z-index: 1;
+    padding: 0.35rem 0.6rem;
     font-family: var(--font-mono);
     font-size: 0.7rem;
     font-weight: 600;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    color: var(--ink-500);
-    transition: var(--transition);
-}
-.lang-toggle:hover { border-color: var(--amber-500); color: var(--ink-900); }
-.lang-toggle .lang-opt {
-    padding: 0.05rem 0.2rem;
-    border-radius: 2px;
-    transition: var(--transition);
+    color: rgba(255, 255, 255, 0.8);
+    transition: color 0.3s ease;
+    width: 38px;
+    text-align: center;
+    pointer-events: none;
 }
 .lang-toggle .lang-opt.is-active {
-    background: var(--ink-900);
-    color: var(--amber-500);
+    color: #ffffff;
 }
-.lang-toggle .lang-sep { color: var(--ink-200); }
+html[lang="hi"] .lang-toggle .lang-toggle-thumb {
+    transform: translateX(100%);
+}
 
 .anniversary-banner {
     position: relative;
     z-index: 2;
     overflow: hidden;
-    background: linear-gradient(90deg, #eab308, #facc15, #ca8a04, #eab308);
-    background-size: 300% 100%;
-    animation: gradientFlow 5s ease-in-out infinite alternate;
+    background: linear-gradient(110deg, #d1d5db 0%, #f3f4f6 30%, #9ca3af 50%, #f3f4f6 70%, #d1d5db 100%);
+    background-size: 200% auto;
+    animation: gradientFlow 4s linear infinite;
     color: var(--ink-900);
     text-align: center;
     font-family: var(--font-mono);
@@ -383,8 +401,8 @@ h1, h2, h3, h4 {
     letter-spacing: 0.22em;
     text-transform: uppercase;
     padding: 0.65rem 1rem;
-    border-top: 1px solid #ca8a04;
-    border-bottom: 1px solid #ca8a04;
+    border-top: 1px solid #9ca3af;
+    border-bottom: 1px solid #9ca3af;
 }
 .anniversary-banner span {
     position: relative;
@@ -394,8 +412,8 @@ h1, h2, h3, h4 {
 }
 
 @keyframes gradientFlow {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
+    0% { background-position: 0% center; }
+    100% { background-position: 200% center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -446,7 +464,7 @@ html[lang="hi"] .anniversary-banner {
 .hero-bg {
     position: absolute; inset: 0;
     background-image:
-        linear-gradient(115deg, rgba(10, 22, 40, 0.92) 0%, rgba(10, 22, 40, 0.55) 60%, rgba(10, 22, 40, 0.85) 100%),
+        linear-gradient(115deg, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.55) 60%, rgba(0, 0, 0, 0.85) 100%),
         url('banner.png');
     background-size: cover, contain;
     background-position: center, center top;
@@ -492,7 +510,7 @@ html[lang="hi"] .anniversary-banner {
     position: relative;
     z-index: 1;
     border-top: 1px solid rgba(245, 158, 11, 0.25);
-    background: rgba(10, 22, 40, 0.7);
+    background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(6px);
 }
 .hero-stats-inner {
@@ -650,7 +668,8 @@ html[lang="hi"] .anniversary-banner {
 /* ---------- Gallery / Fleet ---------- */
 .slideshow-container {
     position: relative;
-    max-width: 1000px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     aspect-ratio: 16/9;
     border-radius: var(--radius-md);
@@ -689,7 +708,7 @@ html[lang="hi"] .anniversary-banner {
     position: absolute;
     left: 0; right: 0; bottom: 0;
     padding: 1.25rem 1.5rem;
-    background: linear-gradient(to top, rgba(10,22,40,0.85), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), transparent);
     color: var(--paper);
     font-family: var(--font-mono);
     font-size: 0.74rem;
@@ -1068,8 +1087,12 @@ html[lang="hi"] .anniversary-banner {
 .site-footer {
     padding: 2.5rem 0 2rem;
     background: var(--ink-900);
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 0.85rem;
+    color: #f59e0b;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
     border-top: 3px solid var(--amber-500);
 }
 .site-footer .footer-inner {
@@ -1111,11 +1134,11 @@ html[lang="hi"] .anniversary-banner {
     position: fixed;
     bottom: 1.75rem;
     right: 1.75rem;
-    background: var(--ink-900);
+    background: transparent;
     color: var(--amber-500);
     width: 46px; height: 46px;
-    border-radius: var(--radius-sm);
-    border: 1px solid var(--amber-500);
+    border-radius: 50%;
+    border: none;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1126,12 +1149,39 @@ html[lang="hi"] .anniversary-banner {
     transition: var(--transition);
     z-index: 1000;
 }
+#backToTopBtn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+    z-index: -2;
+    transition: transform var(--transition);
+}
+#backToTopBtn::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: var(--ink-900);
+    z-index: -1;
+    transition: background var(--transition);
+}
+#backToTopBtn svg {
+    position: relative;
+    z-index: 1;
+}
 #backToTopBtn.show {
     opacity: 1; visibility: visible; transform: translateY(0);
 }
 #backToTopBtn:hover {
-    background: var(--amber-500);
     color: var(--ink-900);
+}
+#backToTopBtn:hover::after {
+    background: var(--amber-500);
+}
+#backToTopBtn:hover::before {
+    transform: scale(1.05);
 }
 
 /* ============================================
