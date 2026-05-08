@@ -51,6 +51,25 @@
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 
+/* GPU acceleration for all animated elements */
+.navbar,
+.carousel-slide,
+.carousel-btn,
+.anniversary-banner,
+#backToTopBtn,
+#backToTopBtn::before,
+#backToTopBtn::after,
+.reveal-on-scroll,
+.lang-toggle .lang-toggle-thumb,
+.nav-wrap,
+.btn {
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+}
+
 body {
     background: var(--bg);
     color: var(--text);
