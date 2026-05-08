@@ -613,7 +613,6 @@ h1, h2, h3, h4 {
 .slide:nth-child(4) { animation-delay: 9s; }
 .slide:nth-child(5) { animation-delay: 12s; }
 .slide:nth-child(6) { animation-delay: 15s; }
-.slide:nth-child(7) { animation-delay: 18s; }
 
 @keyframes crossfadeCarousel {
     0%      { opacity: 0; transform: scale(1.06); }
@@ -1081,6 +1080,12 @@ h1, h2, h3, h4 {
 
 /* Tablet, collapse nav into a slide-down panel */
 @media (max-width: 1024px) {
+    .hero-bg {
+        background-size: cover, contain;
+        background-position: center, center top;
+        background-repeat: no-repeat;
+    }
+
     .nav-toggle { display: flex; }
 
     .navbar { padding: 0.75rem 1.25rem; flex-wrap: nowrap; }
