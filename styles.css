@@ -261,18 +261,39 @@ h1, h2, h3, h4 {
     background: rgba(0, 0, 0, 0.95);
     backdrop-filter: saturate(140%) blur(10px);
     -webkit-backdrop-filter: saturate(140%) blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: none;
     padding: 0.85rem 1.5rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    transition: padding var(--transition), box-shadow var(--transition);
     gap: 1rem;
+    border-radius: 0;
+    margin: 0;
+    width: 100%;
+    box-shadow: none;
+    transition:
+        top 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        width 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        left 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        right 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        padding 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+        border-radius 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        background 0.4s ease,
+        border-color 0.4s ease,
+        box-shadow 0.5s ease;
 }
 .navbar.scrolled {
+    top: 0.75rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    width: calc(100% - 3rem);
     padding: 0.55rem 1.5rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.92) 0%, rgba(30, 30, 30, 0.95) 50%, rgba(0, 0, 0, 0.92) 100%);
+    border: 1px solid rgba(245, 158, 11, 0.15);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(245, 158, 11, 0.08);
 }
 
 .logo-container { display: flex; align-items: center; gap: 0.75rem; min-width: 0; }
@@ -443,7 +464,7 @@ html[lang="hi"] .anniversary-banner {
 .nav-toggle span {
     display: block;
     width: 18px; height: 2px;
-    background: var(--ink-700);
+    background: var(--amber-500);
     transition: var(--transition);
 }
 .nav-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -665,44 +686,82 @@ html[lang="hi"] .anniversary-banner {
 
 
 
-/* ---------- Gallery / Fleet ---------- */
-.slideshow-container {
+/* ---------- 3-Panel Carousel ---------- */
+.carousel-wrapper {
     position: relative;
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    aspect-ratio: 16/9;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0 1.75rem;
+}
+.carousel-track {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 0;
+}
+.carousel-slide {
+    position: relative;
     border-radius: var(--radius-md);
     overflow: hidden;
     background: var(--ink-900);
-    border: 1px solid rgba(245, 158, 11, 0.25);
-    box-shadow: var(--shadow-lg);
+    flex-shrink: 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity 0.4s ease,
+                filter 0.4s ease;
+}
+.carousel-slide.is-transitioning {
+    opacity: 0 !important;
+    transform: scale(0.95);
+}
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.carousel-slide--prev,
+.carousel-slide--next {
+    width: 18%;
+    aspect-ratio: 3/4;
+    opacity: 0.45;
+    filter: brightness(0.6);
     cursor: pointer;
 }
-.slide {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    opacity: 0;
-    animation: crossfadeCarousel 21s infinite linear;
-    transition: transform 10s ease-out;
+.carousel-slide--prev:hover,
+.carousel-slide--next:hover {
+    opacity: 0.7;
+    filter: brightness(0.8);
 }
-.slide:nth-child(1) { animation-delay: 0s; }
-.slide:nth-child(2) { animation-delay: 3.5s; }
-.slide:nth-child(3) { animation-delay: 7s; }
-.slide:nth-child(4) { animation-delay: 10.5s; }
-.slide:nth-child(5) { animation-delay: 14s; }
-.slide:nth-child(6) { animation-delay: 17.5s; }
+.carousel-slide--active {
+    flex: 1;
+    min-width: 0;
+    aspect-ratio: 16/9;
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    box-shadow: var(--shadow-lg);
+}
 
-@keyframes crossfadeCarousel {
-    0%      { opacity: 0; transform: scale(1.06); }
-    2.86%   { opacity: 1; }
-    14.28%  { opacity: 1; }
-    16.67%  { opacity: 0; transform: scale(1.0); }
-    100%    { opacity: 0; }
+.carousel-btn {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--amber-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: var(--transition);
+    z-index: 2;
 }
-.slideshow-container:hover .slide { animation-play-state: paused; }
+.carousel-btn:hover {
+    background: var(--amber-500);
+    color: var(--ink-900);
+    border-color: var(--amber-500);
+}
 
 .slide-caption {
     position: absolute;
@@ -1174,14 +1233,16 @@ html[lang="hi"] .anniversary-banner {
 #backToTopBtn.show {
     opacity: 1; visibility: visible; transform: translateY(0);
 }
-#backToTopBtn:hover {
-    color: var(--ink-900);
-}
-#backToTopBtn:hover::after {
-    background: var(--amber-500);
-}
-#backToTopBtn:hover::before {
-    transform: scale(1.05);
+@media (hover: hover) {
+    #backToTopBtn:hover {
+        color: var(--ink-900);
+    }
+    #backToTopBtn:hover::after {
+        background: var(--amber-500);
+    }
+    #backToTopBtn:hover::before {
+        transform: scale(1.05);
+    }
 }
 
 /* ============================================
@@ -1198,16 +1259,36 @@ html[lang="hi"] .anniversary-banner {
 
     .nav-toggle { display: flex; }
 
-    .navbar { padding: 0.75rem 1.25rem; flex-wrap: nowrap; }
-    .navbar.scrolled { padding: 0.55rem 1.25rem; }
+    .navbar {
+        padding: 0.75rem 1.25rem;
+        flex-wrap: nowrap;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .navbar.scrolled {
+        padding: 0.55rem 1.25rem;
+        top: 0.5rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        width: calc(100% - 1.5rem);
+        border-radius: 16px;
+    }
+    /* When menu is open on scrolled state, expand back to full width */
+    .navbar.scrolled.nav-open {
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        border-radius: 0 0 16px 16px;
+    }
 
     .nav-wrap {
         position: absolute;
         top: 100%;
         left: 0;
         right: 0;
-        background: var(--ivory);
-        border-bottom: 1px solid var(--rule);
+        background: var(--ink-900);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: 0 0 16px 16px;
         flex-direction: column;
         align-items: stretch;
         gap: 0;
@@ -1215,7 +1296,7 @@ html[lang="hi"] .anniversary-banner {
         max-height: 0;
         overflow: hidden;
         transition: max-height 280ms ease;
-        box-shadow: var(--shadow-md);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
     }
     .nav-wrap.is-open { max-height: 600px; }
 
@@ -1225,7 +1306,7 @@ html[lang="hi"] .anniversary-banner {
         gap: 0;
         padding: 0.5rem 0;
     }
-    .nav-links li { border-bottom: 1px solid var(--rule); }
+    .nav-links li { border-bottom: 1px solid rgba(255, 255, 255, 0.06); }
     .nav-links li:last-child { border-bottom: 0; }
     .nav-links a {
         display: block;
