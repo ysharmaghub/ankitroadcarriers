@@ -15,9 +15,11 @@
     --ivory-2:        #f3efe7;
     --paper:          #ffffff;
 
-    --amber-500:      #f59e0b;
-    --amber-600:      #d97706;
-    --amber-100:      #fef3c7;
+    --accent-500:      #FFFFFF;
+    --accent-600:      #e5e7eb;
+    --accent-100:      #ffffff;
+    --brand-red:       #B4122A;
+    --brand-red-dark:  #8c0e21;
 
     --brick-600:      #b91c1c;
     --brick-700:      #991b1b;
@@ -60,7 +62,7 @@ body {
     text-rendering: optimizeLegibility;
 }
 
-/* Hindi mode — swap to Devanagari typeface, disable Latin-only
+/* Hindi mode â€” swap to Devanagari typeface, disable Latin-only
    formatting (uppercase, tight tracking). Keep all sizes identical
    to English so the layout never shifts when switching languages. */
 html[lang="hi"] {
@@ -93,9 +95,9 @@ html[lang="hi"] .btn { text-transform: none; letter-spacing: 0.04em; }
 html[lang="hi"] .company-name     { white-space: normal; overflow: visible; text-overflow: clip; }
 html[lang="hi"] .company-tagline  { white-space: normal; overflow: visible; text-overflow: clip; }
 
-/* ---------- Language switch · full-page wipe ----------
-   A dark overlay sweeps left→right to cover, text swaps behind it,
-   then the overlay sweeps out right→left to reveal. */
+/* ---------- Language switch Â· full-page wipe ----------
+   A dark overlay sweeps leftâ†’right to cover, text swaps behind it,
+   then the overlay sweeps out rightâ†’left to reveal. */
 
 .lang-wipe {
     position: fixed;
@@ -144,8 +146,8 @@ html.lang-switching body::after {
     right: 0;
     width: 3px;
     height: 100%;
-    background: var(--amber-500);
-    box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+    background: var(--brand-red);
+    box-shadow: 0 0 20px rgba(180, 18, 42, 0.5);
 }
 
 /* Phase 1: wipe sweeps in from left, covering the page */
@@ -183,8 +185,8 @@ html.lang-switching body::after {
 
 /* Subtle accent flash on the toggle itself when language changes */
 html.lang-switching .lang-toggle {
-    box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
-    border-color: var(--amber-500);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+    border-color: var(--accent-500);
     transition: box-shadow 200ms ease, border-color 200ms ease;
 }
 
@@ -221,7 +223,7 @@ h1, h2, h3, h4 {
     content: "";
     width: 28px;
     height: 2px;
-    background: var(--amber-500);
+    background: var(--brand-red);
 }
 .eyebrow-center { justify-content: center; }
 
@@ -234,8 +236,12 @@ h1, h2, h3, h4 {
     line-height: 1.05;
 }
 .page-title > span { display: block; }
+.page-title span:first-child {
+    color: var(--brand-red);
+}
+
 .page-title .accent {
-    color: var(--amber-500);
+    color: var(--accent-500);
 }
 
 .subtitle {
@@ -325,7 +331,7 @@ h1, h2, h3, h4 {
     font-family: var(--font-mono);
     font-size: 0.62rem;
     font-weight: 500;
-    color: var(--amber-600);
+    color: var(--brand-red);
     text-transform: uppercase;
     letter-spacing: 0.16em;
     margin-top: 2px;
@@ -363,7 +369,7 @@ h1, h2, h3, h4 {
     position: absolute;
     left: 0; right: 0; bottom: -2px;
     height: 2px;
-    background: var(--amber-500);
+    background: var(--brand-red);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform var(--transition);
@@ -394,7 +400,7 @@ h1, h2, h3, h4 {
     bottom: 2px;
     left: 2px;
     width: calc(50% - 2px);
-    background: var(--amber-600);
+    background: var(--brand-red);
     border-radius: 16px;
     transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     z-index: 0;
@@ -475,7 +481,7 @@ html[lang="hi"] .anniversary-banner {
 .nav-toggle span {
     display: block;
     width: 18px; height: 2px;
-    background: var(--amber-500);
+    background: var(--brand-red);
     transition: var(--transition);
 }
 .nav-toggle.is-open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
@@ -507,8 +513,8 @@ html[lang="hi"] .anniversary-banner {
     content: "";
     position: absolute; inset: 0;
     background-image:
-        linear-gradient(rgba(245, 158, 11, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(245, 158, 11, 0.06) 1px, transparent 1px);
+        linear-gradient(rgba(255, 255, 255, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.06) 1px, transparent 1px);
     background-size: 56px 56px;
     mix-blend-mode: screen;
     pointer-events: none;
@@ -527,8 +533,8 @@ html[lang="hi"] .anniversary-banner {
     justify-content: center;
     text-align: left;
 }
-.hero-content .eyebrow { color: var(--amber-500); margin-bottom: 1.25rem; }
-.hero-content .eyebrow::before { background: var(--amber-500); }
+.hero-content .eyebrow { color: var(--brand-red); margin-bottom: 1.25rem; }
+.hero-content .eyebrow::before { background: var(--brand-red); }
 
 .hero-buttons {
     display: flex;
@@ -541,7 +547,7 @@ html[lang="hi"] .anniversary-banner {
 .hero-stats {
     position: relative;
     z-index: 1;
-    border-top: 1px solid rgba(245, 158, 11, 0.25);
+    border-top: 1px solid rgba(255, 255, 255, 0.25);
     background: rgba(0, 0, 0, 0.7);
     backdrop-filter: blur(6px);
 }
@@ -567,7 +573,7 @@ html[lang="hi"] .anniversary-banner {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(1.25rem, 2.4vw, 1.6rem);
-    color: var(--amber-500);
+    color: var(--brand-red);
     letter-spacing: -0.01em;
     line-height: 1.1;
 }
@@ -611,7 +617,7 @@ html[lang="hi"] .anniversary-banner {
     position: absolute;
     top: 0; left: 0;
     width: 100%; height: 3px;
-    background: var(--amber-500);
+    background: var(--brand-red);
     transform: scaleX(0);
     transform-origin: left;
     transition: transform 350ms cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -621,7 +627,7 @@ html[lang="hi"] .anniversary-banner {
 .service-card:hover {
     transform: translateY(-4px);
     box-shadow: var(--shadow-md);
-    border-color: rgba(245, 158, 11, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 .service-card:hover::before { transform: scaleX(1); }
 
@@ -669,7 +675,7 @@ html[lang="hi"] .anniversary-banner {
     font-size: 0.66rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--amber-600);
+    color: var(--brand-red);
     margin-bottom: 0.6rem;
     display: block;
 }
@@ -749,7 +755,7 @@ html[lang="hi"] .anniversary-banner {
     flex: 1;
     min-width: 0;
     aspect-ratio: 16/9;
-    border: 1px solid rgba(245, 158, 11, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     box-shadow: var(--shadow-lg);
 }
 
@@ -759,8 +765,8 @@ html[lang="hi"] .anniversary-banner {
     height: 42px;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(0, 0, 0, 0.6);
-    color: var(--amber-500);
+    background: var(--brand-red);
+    color: var(--ink-900);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -769,9 +775,9 @@ html[lang="hi"] .anniversary-banner {
     z-index: 2;
 }
 .carousel-btn:hover {
-    background: var(--amber-500);
-    color: var(--ink-900);
-    border-color: var(--amber-500);
+    background: #ffffff;
+    color: var(--brand-red);
+    border-color: #ffffff;
 }
 
 .slide-caption {
@@ -799,8 +805,8 @@ html[lang="hi"] .anniversary-banner {
     max-width: 100%;
     padding: 1rem 1.5rem 1rem 1rem;
     background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(245, 158, 11, 0.18);
-    border-left: 3px solid var(--amber-500);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-left: 3px solid var(--brand-red);
     border-radius: var(--radius-sm);
     text-align: left;
 }
@@ -809,7 +815,7 @@ html[lang="hi"] .anniversary-banner {
     border-radius: 50%;
     overflow: hidden;
     flex-shrink: 0;
-    border: 2px solid rgba(245, 158, 11, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.6);
 }
 .founder-photo img { width: 100%; height: 100%; object-fit: cover; }
 .founder-info { display: flex; flex-direction: column; gap: 0.15rem; }
@@ -818,7 +824,7 @@ html[lang="hi"] .anniversary-banner {
     font-size: 0.62rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--amber-500);
+    color: var(--brand-red);
 }
 .founder-name-line {
     font-family: var(--font-display);
@@ -897,7 +903,7 @@ html[lang="hi"] .anniversary-banner {
     height: 100%;
     object-fit: contain;
 }
-.client-card:hover { border-color: var(--amber-500); transform: translateY(-3px); }
+.client-card:hover { border-color: var(--accent-500); transform: translateY(-3px); }
 .client-card:hover img { filter: grayscale(0%); opacity: 1; }
 
 @keyframes scrollMarquee {
@@ -976,7 +982,7 @@ html[lang="hi"] .anniversary-banner {
     color: var(--ink-900);
     text-transform: uppercase;
     letter-spacing: 0.02em;
-    border-left: 2px solid var(--amber-500);
+    border-left: 2px solid var(--brand-red);
     padding-left: 0.6rem;
     line-height: 1.1;
 }
@@ -985,8 +991,8 @@ html[lang="hi"] .anniversary-banner {
    - Subtle outer glow that breathes with the dot
    - Background fades between off/on amber tint to mimic a lit lamp */
 .office-flag {
-    --blink-on:  rgba(245, 158, 11, 0.95);
-    --blink-off: rgba(245, 158, 11, 0.18);
+    --blink-on:  var(--brand-red);
+    --blink-off: rgba(180, 18, 42, 0.18);
 
     position: relative;
     font-family: var(--font-mono);
@@ -995,10 +1001,10 @@ html[lang="hi"] .anniversary-banner {
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--ink-900);
-    background: var(--amber-100);
+    background: rgba(180, 18, 42, 0.1);
     padding: 0.22rem 0.5rem 0.22rem 1.35rem;
     border-radius: 2px;
-    border: 1px solid rgba(245, 158, 11, 0.55);
+    border: 1px solid var(--brand-red);
     display: inline-flex;
     align-items: center;
     line-height: 1;
@@ -1016,23 +1022,23 @@ html[lang="hi"] .anniversary-banner {
     background: var(--blink-on);
     transform: translateY(-50%);
     box-shadow:
-        0 0 0 2px rgba(245, 158, 11, 0.18),
+        0 0 0 2px rgba(180, 18, 42, 0.18),
         0 0 6px var(--blink-on);
     animation: hazardLED 900ms steps(1, end) infinite;
 }
 
 @keyframes hazardLamp {
-    0%, 49.999%   { background: var(--amber-100); border-color: rgba(245, 158, 11, 0.55); }
-    50%, 99.999%  { background: rgba(245, 158, 11, 0.35); border-color: var(--amber-500); }
+    0%, 49.999%   { background: rgba(180, 18, 42, 0.05); border-color: rgba(180, 18, 42, 0.55); }
+    50%, 99.999%  { background: rgba(180, 18, 42, 0.25); border-color: var(--brand-red); }
 }
 @keyframes hazardLED {
     0%, 49.999%   {
         background: var(--blink-on);
-        box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.18), 0 0 8px var(--blink-on);
+        box-shadow: 0 0 0 2px rgba(180, 18, 42, 0.18), 0 0 8px var(--blink-on);
     }
     50%, 99.999%  {
         background: var(--blink-off);
-        box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.06), 0 0 0 var(--blink-off);
+        box-shadow: 0 0 0 2px rgba(180, 18, 42, 0.06), 0 0 0 var(--blink-off);
     }
 }
 
@@ -1040,7 +1046,7 @@ html[lang="hi"] .anniversary-banner {
 @media (prefers-reduced-motion: reduce) {
     .office-flag,
     .office-flag::before { animation: none; }
-    .office-flag::before { box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.18); }
+    .office-flag::before { box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.18); }
 }
 .office-address {
     margin-top: 0.65rem;
@@ -1053,16 +1059,16 @@ html[lang="hi"] .anniversary-banner {
     display: inline-block;
     margin-top: 0.35rem;
     margin-left: calc(36px + 0.75rem);
-    color: var(--amber-600);
+    color: var(--brand-red);
     font-size: 0.88rem;
     font-weight: 600;
     text-decoration: underline;
-    text-decoration-color: var(--amber-500);
+    text-decoration-color: var(--brand-red);
     text-underline-offset: 3px;
     transition: color var(--transition);
 }
 .office-map-link:hover,
-.office-map-link.is-active { color: var(--amber-600); }
+.office-map-link.is-active { color: var(--brand-red-dark); }
 .office-lines {
     margin-top: 0.5rem;
     padding-left: calc(36px + 0.75rem);
@@ -1074,11 +1080,11 @@ html[lang="hi"] .anniversary-banner {
     color: var(--ink-700);
     text-decoration: none;
     font-weight: 500;
-    border-bottom: 1px dotted var(--amber-500);
+    border-bottom: 1px dotted var(--brand-red);
     transition: color var(--transition);
     align-self: flex-start;
 }
-.office-lines a:hover { color: var(--amber-600); }
+.office-lines a:hover { color: var(--brand-red); }
 
 .social-links {
     display: flex;
@@ -1121,13 +1127,13 @@ html[lang="hi"] .anniversary-banner {
     font-family: var(--font-body);
 }
 .btn-primary {
-    background: var(--amber-500);
-    color: var(--ink-900);
-    border-color: var(--amber-500);
+    background: var(--brand-red);
+    color: #ffffff;
+    border-color: var(--brand-red);
 }
 .btn-primary:hover {
-    background: var(--amber-600);
-    border-color: var(--amber-600);
+    background: var(--brand-red-dark);
+    border-color: var(--brand-red-dark);
     transform: translateY(-1px);
 }
 .btn-secondary {
@@ -1145,8 +1151,8 @@ html[lang="hi"] .anniversary-banner {
     color: var(--ink-700);
 }
 .btn-outline:hover {
-    border-color: var(--amber-500);
-    color: var(--text);
+    border-color: var(--brand-red);
+    color: var(--brand-red);
 }
 .btn-outline.btn-social-wa:hover { background: #25d366; color: #fff; border-color: #25d366; }
 .btn-outline.btn-social-facebook:hover { background: #1877F2; color: #fff; border-color: #1877F2; }
@@ -1157,13 +1163,13 @@ html[lang="hi"] .anniversary-banner {
 .site-footer {
     padding: 2.5rem 0 2rem;
     background: var(--ink-900);
-    color: #f59e0b;
+    color: #FFFFFF;
     font-size: 0.72rem;
     font-family: var(--font-mono);
     font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.16em;
-    border-top: 3px solid var(--amber-500);
+    border-top: 3px solid var(--accent-500);
 }
 .site-footer .footer-inner {
     display: flex;
@@ -1178,7 +1184,7 @@ html[lang="hi"] .anniversary-banner {
     font-family: var(--font-mono);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--amber-500);
+    color: var(--accent-500);
     font-size: 0.72rem;
 }
 
@@ -1205,7 +1211,7 @@ html[lang="hi"] .anniversary-banner {
     bottom: 1.75rem;
     right: 1.75rem;
     background: transparent;
-    color: var(--amber-500);
+    color: var(--brand-red);
     width: 46px; height: 46px;
     border-radius: 50%;
     border: none;
@@ -1224,7 +1230,7 @@ html[lang="hi"] .anniversary-banner {
     position: absolute;
     inset: -2px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706);
+    background: linear-gradient(135deg, #B4122A, #8c0e21, #660a18);
     z-index: -2;
     transition: transform var(--transition);
 }
@@ -1249,7 +1255,7 @@ html[lang="hi"] .anniversary-banner {
         color: var(--ink-900);
     }
     #backToTopBtn:hover::after {
-        background: var(--amber-500);
+        background: var(--brand-red);
     }
     #backToTopBtn:hover::before {
         transform: scale(1.05);
@@ -1393,3 +1399,6 @@ html[lang="hi"] .anniversary-banner {
 @media (max-width: 380px) {
     .company-tagline { display: none; }
 }
+
+
+
