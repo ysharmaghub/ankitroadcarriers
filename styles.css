@@ -236,9 +236,8 @@ h1, h2, h3, h4 {
     line-height: 1.05;
 }
 .page-title > span { display: block; }
-.page-title span:first-child {
-    color: #FFFFFF;
-}
+
+.page-title span:first-child { color: #B4122A; }
 
 .page-title .accent {
     color: var(--accent-500);
