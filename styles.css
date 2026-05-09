@@ -1378,14 +1378,16 @@ html[lang="hi"] .anniversary-banner {
     .client-card { width: 150px; height: 88px; padding: 1rem; }
     .client-card--large-logo { padding: 0.6rem; }
 
+    .site-footer { padding: 1.25rem 0; }
     .site-footer .footer-inner {
-        flex-direction: column;
-        text-align: center;
-        padding-right: 0;
-        padding-bottom: 3.5rem;
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+        padding-right: 4rem;
+        padding-bottom: 0;
     }
 
-    #backToTopBtn { bottom: 1rem; right: 1rem; }
+    #backToTopBtn { bottom: 1.25rem; right: 1.25rem; width: 40px; height: 40px; }
 }
 
 @media (max-width: 380px) {
