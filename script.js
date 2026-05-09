@@ -169,12 +169,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 3-Panel Carousel
     const carouselImages = [
-        'truck/2.jpg',
-        'truck/20180928_161541.jpg',
+        'truck/2.png',
+        'truck/4.png',
         'truck/20190910_102830.jpg',
-        'truck/2022-10-07.jpg',
+        'truck/1.png',
         'truck/2022-11-11.jpg',
-        'truck/parking.jpg'
+        'truck/3.png'
     ];
     const carouselWrapper = document.querySelector('.carousel-wrapper');
     if (carouselWrapper && carouselImages.length) {
