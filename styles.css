@@ -15,10 +15,10 @@
     --ivory-2:        #f3efe7;
     --paper:          #ffffff;
 
-    --accent-500:      #FFFFFF;
+    --accent-500:      #8A081E;
     --accent-600:      #e5e7eb;
     --accent-100:      #ffffff;
-    --brand-red:       #B4122A;
+    --brand-red:       #8A081E;
     --brand-red-dark:  #8c0e21;
 
     --brick-600:      #b91c1c;
@@ -235,12 +235,15 @@ h1, h2, h3, h4 {
     text-transform: uppercase;
     line-height: 1.05;
 }
-.page-title > span { display: block; }
+.page-title > span { display: inline; }
 
-.page-title span:first-child { color: #B4122A; }
+.page-title span:first-child { color: #8A081E; }
+
+.hero-title-years { color: #FFFFFF; }
 
 .page-title .accent {
-    color: var(--accent-500);
+    display: block;
+    color: #FFFFFF;
 }
 
 .subtitle {
