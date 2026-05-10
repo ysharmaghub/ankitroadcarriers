@@ -117,6 +117,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const mapWrapper = document.querySelector('.map-wrapper');
     const officeMapLinks = document.querySelectorAll('.office-map-link');
     if (contactMap && mapWrapper && officeMapLinks.length) {
+        const scrollMapIntoViewOnMobile = () => {
+            if (!window.matchMedia('(max-width: 1024px)').matches) return;
+
+            window.setTimeout(() => {
+                const headerOffset = 80;
+                const mapPosition = mapWrapper.getBoundingClientRect().top + window.scrollY - headerOffset;
+
+                window.scrollTo({
+                    top: mapPosition,
+                    behavior: 'smooth'
+                });
+            }, 180);
+        };
+
         officeMapLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 const nextSrc = link.dataset.mapSrc;
@@ -125,6 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.preventDefault();
 
                 officeMapLinks.forEach(item => item.classList.toggle('is-active', item === link));
+                scrollMapIntoViewOnMobile();
                 if (contactMap.getAttribute('src') === nextSrc) return;
 
                 mapWrapper.classList.add('is-changing');
