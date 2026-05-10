@@ -768,7 +768,7 @@ html[lang="hi"] .anniversary-banner {
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
     background: var(--brand-red);
-    color: var(--ink-900);
+    color: #FFFFFF;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1213,7 +1213,7 @@ html[lang="hi"] .anniversary-banner {
     bottom: 1.75rem;
     right: 1.75rem;
     background: var(--brand-red);
-    color: var(--ink-900);
+    color: #FFFFFF;
     width: 42px; height: 42px;
     border-radius: 50%;
     border: 1px solid rgba(255, 255, 255, 0.15);
