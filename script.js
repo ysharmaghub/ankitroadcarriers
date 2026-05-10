@@ -96,21 +96,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Back to Top Button Logic
     const backToTopBtn = document.getElementById('backToTopBtn');
-    
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) {
-            backToTopBtn.classList.add('show');
-        } else {
-            backToTopBtn.classList.remove('show');
-        }
-    });
+    const siteFooter = document.querySelector('.site-footer');
 
-    backToTopBtn.addEventListener('click', () => {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
+    if (backToTopBtn) {
+        const updateBackToTopButton = () => {
+            backToTopBtn.classList.toggle('show', window.scrollY > 400);
+
+            if (!siteFooter) return;
+
+            const footerRect = siteFooter.getBoundingClientRect();
+            const footerOverlap = Math.max(0, window.innerHeight - footerRect.top);
+
+            document.documentElement.style.setProperty(
+                '--back-to-top-footer-clearance',
+                `${footerOverlap}px`
+            );
+        };
+
+        window.addEventListener('scroll', updateBackToTopButton, { passive: true });
+        window.addEventListener('resize', updateBackToTopButton);
+        updateBackToTopButton();
+
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         });
-    });
+    }
 
     // Contact map switching
     const contactMap = document.getElementById('contactMap');
