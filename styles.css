@@ -237,7 +237,7 @@ h1, h2, h3, h4 {
 }
 .page-title > span { display: inline; }
 
-.page-title span:first-child { color: #8A081E; }
+.page-title span:first-child { color: #FFFFFF; }
 
 .hero-title-years { color: #FFFFFF; }
 
@@ -575,7 +575,7 @@ html[lang="hi"] .anniversary-banner {
     font-family: var(--font-display);
     font-weight: 800;
     font-size: clamp(1.25rem, 2.4vw, 1.6rem);
-    color: var(--brand-red);
+    color: #FFFFFF;
     letter-spacing: -0.01em;
     line-height: 1.1;
 }
@@ -826,7 +826,7 @@ html[lang="hi"] .anniversary-banner {
     font-size: 0.62rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--brand-red);
+    color: #FFFFFF;
 }
 .founder-name-line {
     font-family: var(--font-display);
@@ -1186,7 +1186,7 @@ html[lang="hi"] .anniversary-banner {
     font-family: var(--font-mono);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--accent-500);
+    color: #FFFFFF;
     font-size: 0.72rem;
 }
 
