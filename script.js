@@ -415,9 +415,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (isCompactCarousel()) {
-                setCarouselImages(targetIndex);
-                animateActiveCaption();
-                isCarouselAnimating = false;
+                const slideDistance = '18%';
+                const exitX = direction === 'next' ? `-${slideDistance}` : slideDistance;
+                const enterX = direction === 'next' ? slideDistance : `-${slideDistance}`;
+                const MOBILE_MS = 350;
+
+                // Slide-out + fade the current image
+                const exitAnim = activePanel.animate([
+                    { transform: 'translateX(0)', opacity: 1 },
+                    { transform: `translateX(${exitX})`, opacity: 0 }
+                ], { duration: MOBILE_MS, easing: 'cubic-bezier(0.4, 0, 0.2, 1)', fill: 'forwards' });
+
+                exitAnim.onfinish = () => {
+                    exitAnim.cancel();
+                    setCarouselImages(targetIndex);
+
+                    // Slide-in + fade the new image from opposite side
+                    const enterAnim = activePanel.animate([
+                        { transform: `translateX(${enterX})`, opacity: 0 },
+                        { transform: 'translateX(0)', opacity: 1 }
+                    ], { duration: MOBILE_MS, easing: 'cubic-bezier(0.0, 0, 0.2, 1)', fill: 'forwards' });
+
+                    animateActiveCaption();
+
+                    enterAnim.onfinish = () => {
+                        enterAnim.cancel();
+                        isCarouselAnimating = false;
+                    };
+                };
                 return true;
             }
 

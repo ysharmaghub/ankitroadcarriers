@@ -1535,7 +1535,7 @@ html[lang="hi"] .anniversary-banner {
     /* Mobile Carousel */
     .carousel-wrapper { padding: 0 1.25rem; }
     .carousel-slide--prev, .carousel-slide--next { display: none; }
-    .carousel-slide--active { aspect-ratio: 4/3; }
+    .carousel-slide--active { aspect-ratio: 4/3; overflow: hidden; will-change: transform, opacity; }
     .carousel-btn { display: none; }
     .founder-block {
         padding: 0.85rem 1.25rem 0.85rem 0.85rem;
